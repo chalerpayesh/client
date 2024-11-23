@@ -1,0 +1,17 @@
+{
+  "menu-items": {
+    "labels": {
+      "dashboard": "Dashboard",
+      "reports": "Reports"
+    },
+    "shared": {
+      "labels": {
+        "fromDate": "From Date",
+        "toDate": "To Date",
+        "region": "Region",
+        "camera": "Camera",
+        "service": "Service"
+      }
+    }
+  }
+}

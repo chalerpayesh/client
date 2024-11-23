@@ -1,0 +1,17 @@
+{
+  "menu-items": {
+    "labels": {
+      "dashboard": "پیشخوان",
+      "reports": "گزارش‌ها"
+    }
+  },
+  "shared": {
+    "labels": {
+      "fromDate": "از تاریخ",
+      "toDate": "از تاریخ",
+      "region": "منطقه",
+      "camera": "دوربین",
+      "service": "خدمت"
+    }
+  }
+}
