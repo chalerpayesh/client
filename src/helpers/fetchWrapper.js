@@ -1,11 +1,18 @@
 import axios from "axios";
+import { Loading } from "quasar";
 
-export const fetchData = async (url, limit = 10) => {
+export const fetch = async (url) => {
+  Loading.show({
+    spinnerSize: 50,
+  });
+
   try {
     const response = await axios.get(url);
-    return response.data.slice(0, limit);
+    return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
     throw new Error("Failed to fetch data from the API.");
+  } finally {
+    Loading.hide();
   }
 };

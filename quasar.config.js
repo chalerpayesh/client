@@ -43,7 +43,13 @@ module.exports = configure(function (/* ctx */) {
     build: {
       rtl: true,
       target: {
-        browser: ["es2019", "edge88", "firefox78", "chrome87", "safari13.1"],
+        browser: [
+          "es2019",
+          "edge88",
+          "firefox78",
+          "chrome87",
+          "safari13.1",
+        ],
         node: "node20",
       },
 
@@ -114,7 +120,7 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
+      plugins: ["Loading", "Dialog"],
     },
 
     // animations: 'all', // --- includes all animations
