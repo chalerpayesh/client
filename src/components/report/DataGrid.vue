@@ -1,33 +1,45 @@
 <template>
   <div class="q-mt-lg">
     <div class="grid-container">
-      <q-card v-for="item in items" :key="item.id" class="grid-item">
-        <img :src="item.url" alt="Car image" class="car-image" />
+      <q-card
+        v-ripple
+        v-for="item in items"
+        :key="item.id"
+        class="grid-item cursor-pointer"
+        @click="openDetailSheet(item)"
+      >
+        <q-img
+          style="height: 200px"
+          :src="item.url"
+          alt="Car image"
+        />
 
         <q-card-section>
-          <div class="row">
-            <div class="col-2">شماره:</div>
-            <div class="col">{{ item.id }}</div>
-          </div>
+          <div class="q-gutter-sm">
+            <div class="row">
+              <div class="col-2">شماره:</div>
+              <div class="col">{{ item.id }}</div>
+            </div>
 
-          <div class="row">
-            <div class="col-2">خدمت:</div>
-            <div class="col">تشخیص انسان</div>
-          </div>
+            <div class="row">
+              <div class="col-2">خدمت:</div>
+              <div class="col">تشخیص انسان</div>
+            </div>
 
-          <div class="row">
-            <div class="col-2">اطلاعات:</div>
-            <div class="col">3</div>
-          </div>
+            <div class="row">
+              <div class="col-2">اطلاعات:</div>
+              <div class="col">3</div>
+            </div>
 
-          <div class="row">
-            <div class="col-2">زمان:</div>
-            <div class="col">12: 39</div>
-          </div>
+            <div class="row">
+              <div class="col-2">زمان:</div>
+              <div class="col">12: 39</div>
+            </div>
 
-          <div class="row">
-            <div class="col-2">تاریخ:</div>
-            <div class="col">1403/08/27</div>
+            <div class="row">
+              <div class="col-2">تاریخ:</div>
+              <div class="col">1403/08/27</div>
+            </div>
           </div>
         </q-card-section>
       </q-card>
@@ -46,8 +58,13 @@
 
 <script setup>
   import { ref, computed, onMounted } from "vue";
+  import { useQuasar } from "quasar";
   import { fetch } from "src/helpers/fetchWrapper";
+
+  import DetailSheet from "src/components/report/DetailSheet.vue";
   import PageBar from "src/components/shared/PageBar.vue";
+
+  const $q = useQuasar();
 
   const items = ref([]);
   const isLoading = ref(false);
@@ -57,6 +74,7 @@
   const itemsPerPage = ref(20);
   const totalItems = ref(0);
   const pageBar = ref(false);
+  const detailDialog = ref(false);
 
   const totalPages = computed(() =>
     Math.ceil(totalItems.value / itemsPerPage.value)
@@ -79,13 +97,20 @@
       isLoading.value = false;
       pageBar.value = true;
     }
-
-    console.log(items.value);
   };
 
   const loadPage = (page) => {
     currentPage.value = page;
     fetchItems(page);
+  };
+
+  const openDetailSheet = (item) => {
+    $q.dialog({
+      component: DetailSheet,
+      componentProps: {
+        item: item,
+      },
+    });
   };
 
   onMounted(() => {
